@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">식단 플래너</string>
+    <string name="welcome_message">안녕하세요 Bappago입니다</string>
+    <string name="kakao_login">카카오 로그인</string>
+    <string name="naver_login">네이버 로그인</string>
+
+
+    // social login app key
+    <string name="kakao_native_app_key">your_native_app_key</string>
+</resources>

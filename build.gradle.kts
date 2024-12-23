@@ -4,6 +4,6 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.compose) apply false
 
-    id("com.google.dagger.hilt.android") version "2.44" apply false // 버전 업데이트
+    id("com.google.dagger.hilt.android") version "2.50" apply false // 버전 업데이트
     id("com.google.devtools.ksp") version "2.0.10-1.0.24" apply false
 }

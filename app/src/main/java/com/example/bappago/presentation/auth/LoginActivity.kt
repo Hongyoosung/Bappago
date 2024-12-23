@@ -1,6 +1,7 @@
 package com.example.bappago.presentation.auth
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -8,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.bappago.databinding.ActivityLoginBinding
 import com.example.bappago.domain.model.LoginType
+import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -24,6 +27,9 @@ class LoginActivity : AppCompatActivity() {
 
         setupClickListeners()
         observeLoginState()
+
+        val keyHash = Utility.getKeyHash(this)
+        Log.d("KeyHash", keyHash)
     }
 
     private fun setupClickListeners() {

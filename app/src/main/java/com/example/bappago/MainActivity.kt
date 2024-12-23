@@ -12,6 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.bappago.ui.theme.BappagoTheme
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import com.kakao.sdk.common.util.Utility
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +30,9 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+        val keyHash = Utility.getKeyHash(this)
+        Log.d("KeyHash", keyHash)
     }
 }
 

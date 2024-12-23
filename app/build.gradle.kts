@@ -3,7 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+    id("com.google.dagger.hilt.android") version "2.50"
+    kotlin("kapt")  // 이 줄을 추가
 }
 
 android {
@@ -72,8 +73,8 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
 
     // Dependency Injection
-    implementation("com.google.dagger:hilt-android:2.44")
-    ksp("com.google.dagger:hilt-android-compiler:2.44")
+    implementation(libs.hilt.android.v250)
+    ksp(libs.hilt.android.compiler.v250)
 
     // Room
     implementation(libs.androidx.room.runtime)
@@ -88,6 +89,7 @@ dependencies {
     // Image Loading
     implementation(libs.glide)
     ksp(libs.compiler)
+    ksp(libs.hilt.compiler)
 
     // Testing
     testImplementation(libs.junit)
@@ -99,5 +101,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // social login
-    //implementation "com.kakao.sdk:v2-user:2." // 최신 버전 사용
+    implementation(libs.v2.user.v2150) // 최신 버전 사용
 }

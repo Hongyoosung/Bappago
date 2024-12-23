@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/generateFragment">
+
+    <fragment
+        android:id="@+id/generateFragment"
+        android:name="com.example.bappago.presentation.generate.GenerateFragment"
+        android:label="식단 생성" />
+
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.bappago.presentation.calendar.CalendarFragment"
+        android:label="식단 캘린더" />
+
+</navigation>

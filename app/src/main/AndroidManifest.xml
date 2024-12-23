@@ -14,9 +14,6 @@
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
 
         <activity
-
-
-
             android:name=".presentation.auth.LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -37,6 +34,11 @@
                     android:host="oauth"
                     android:scheme="@string/kakao_native_app_key" />
             </intent-filter>
-        </activity></application>
+        </activity>
+
+        <activity
+            android:name=".presentation.MainActivity"
+            android:exported="false" />
+    </application>
 
 </manifest>

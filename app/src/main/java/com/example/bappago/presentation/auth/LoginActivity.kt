@@ -1,5 +1,6 @@
 package com.example.bappago.presentation.auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.bappago.databinding.ActivityLoginBinding
 import com.example.bappago.domain.model.LoginType
+import com.example.bappago.presentation.MainActivity
 import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -54,7 +56,8 @@ class LoginActivity : AppCompatActivity() {
                     }
                     is LoginState.Success -> {
                         binding.progressBar.visibility = View.GONE
-                        // TODO: Navigate to MainActivity
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                        finish()  // LoginActivity 종료
                     }
                     is LoginState.Error -> {
                         binding.progressBar.visibility = View.GONE

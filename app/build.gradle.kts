@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.example.bappago"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.bappago"
@@ -19,6 +19,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "CLAUDE_API_KEY", "\"${properties["claude.api.key"]}\"")
     }
 
     buildTypes {
@@ -34,6 +35,7 @@ android {
     buildFeatures {
         viewBinding = true
         compose = true
+        buildConfig = true
     }
 
     compileOptions {
@@ -74,7 +76,9 @@ dependencies {
 
     // Dependency Injection
     implementation(libs.hilt.android.v250)
+    implementation(libs.androidx.media3.transformer)
     ksp(libs.hilt.android.compiler.v250)
+    ksp(libs.hilt.compiler)
 
     // Room
     implementation(libs.androidx.room.runtime)
@@ -89,7 +93,9 @@ dependencies {
     // Image Loading
     implementation(libs.glide)
     ksp(libs.compiler)
-    ksp(libs.hilt.compiler)
+
+
+
 
     // Testing
     testImplementation(libs.junit)
@@ -102,4 +108,8 @@ dependencies {
 
     // social login
     implementation(libs.v2.user.v2150) // 최신 버전 사용
+
+    implementation(libs.androidx.activity.ktx)
+
+    implementation(libs.gson)
 }

@@ -11,6 +11,16 @@ android {
     namespace = "com.example.bappago"
     compileSdk = 35
 
+    dexOptions {
+        javaMaxHeapSize = "4g"
+    }
+
+    // 빌드 성능 향상
+    kotlinOptions {
+        jvmTarget = "11"
+        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+    }
+
     defaultConfig {
         applicationId = "com.example.bappago"
         minSdk = 24

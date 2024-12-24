@@ -46,25 +46,34 @@ class LoginActivity : AppCompatActivity() {
 
     private fun observeLoginState() {
         lifecycleScope.launch {
-            viewModel.loginState.collect { state ->
-                when (state) {
-                    is LoginState.Idle -> {
-                        binding.progressBar.visibility = View.GONE
-                    }
-                    is LoginState.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
-                    }
-                    is LoginState.Success -> {
-                        binding.progressBar.visibility = View.GONE
-                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                        finish()  // LoginActivity 종료
-                    }
-                    is LoginState.Error -> {
-                        binding.progressBar.visibility = View.GONE
-                        Toast.makeText(this@LoginActivity, state.message, Toast.LENGTH_SHORT).show()
+            try {
+                viewModel.loginState.collect { state ->
+                    when (state) {
+                        is LoginState.Idle -> {
+                            binding.progressBar.visibility = View.GONE
+                        }
+                        is LoginState.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                        }
+                        is LoginState.Success -> {
+                            binding.progressBar.visibility = View.GONE
+                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                            finish()  // LoginActivity 종료
+                        }
+                        is LoginState.Error -> {
+                            binding.progressBar.visibility = View.GONE
+                            handleError(state.message)
+                        }
                     }
                 }
+            } catch (e: Exception) {
+                Log.e("LoginActivity", "Error in login state observation", e)
             }
+
         }
+    }
+
+    private fun handleError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

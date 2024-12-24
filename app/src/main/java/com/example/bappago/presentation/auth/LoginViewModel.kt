@@ -5,9 +5,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.bappago.domain.model.LoginType
 import com.example.bappago.domain.usecase.auth.SignInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,16 +21,18 @@ class LoginViewModel @Inject constructor(
     val loginState: StateFlow<LoginState> = _loginState
 
     fun signIn(loginType: LoginType) {
-        viewModelScope.launch {
-            _loginState.value = LoginState.Loading
-
-            signInUseCase(loginType)
-                .onSuccess { user ->
-                    _loginState.value = LoginState.Success(user)
+        viewModelScope.launch(Dispatchers.IO) {  // Dispatcher 명시
+            try {
+                _loginState.value = LoginState.Loading
+                val result = signInUseCase(loginType)
+                withContext(Dispatchers.Main) {  // UI 업데이트는 메인 스레드에서
+                    _loginState.value = LoginState.Success(result)
                 }
-                .onFailure { exception ->
-                    _loginState.value = LoginState.Error(exception.message ?: "Unknown error occurred")
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    _loginState.value = LoginState.Error(e.message ?: "Unknown error")
                 }
+            }
         }
     }
 }
